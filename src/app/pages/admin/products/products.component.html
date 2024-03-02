@@ -1,0 +1,113 @@
+<div class="row">
+    <div [ngClass]="isSidePanelVisible ? 'col-8' : 'col-12'" >
+        <div class="card">
+            <div class="card-header bg-primary">
+                <div class="row">
+                    <div class="col-6">
+                        Product List
+                    </div>
+                    <div class="col-6 text-end">
+                        <button class="btn btn-sm btn-success" mat-raised-button matTooltip ="New Product" (click)="openSidePanel()">New</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-3 pt-2" *ngFor="let product of productsList">
+                        @for( data of categoryList ; track data)
+                            {
+                             <div class="card">
+                            
+                                 <img class="card-img-top" style="height: 12.125rem !important" [src]="data.imageUrl" alt="Card image">
+                                  <div class="card-body">
+                                      <h4 class="card-title">{{data.shortName}}</h4>
+                                      <p class="card-text">{{data.categoryName}}</p>
+                                
+                                      <a class="btn btn-primary" (click)="onEdit(product)">Edit</a>
+                                      <!-- <a   class="btn btn-danger mx-2" (click)="onDelete(product)">Delete</a> -->
+                                  </div>
+                             </div>
+                            } 
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-4" *ngIf="isSidePanelVisible">
+        <div class="card">
+            <div class="card-header bg-primary">
+                <div class="row">
+                    <div class="col-6" >
+                       New Product 
+                    </div>
+                    <div class="col-6  text-end">
+                        <button class="btn btn-sm btn-success" mat-raised-button matTooltip ="Close" (click)="closeSidePanel()">Close</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <label for="">SKU</label>
+                        <input type="text" mat-raised-button matTooltip ="SKU" [(ngModel)]="productObj.sku" class="form-control">
+                    </div>
+                    <div class="col-6">
+                        <label for="">Name</label>
+                        <input type="text" mat-raised-button matTooltip ="Name" [(ngModel)]="productObj.name" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <label for="">Short Name</label>
+                        <input type="text" mat-raised-button matTooltip ="Short Name" [(ngModel)]="productObj.shortName" class="form-control">
+                    </div>
+                    <div class="col-6">
+                        <label for="">Price</label>
+                        <input type="text" mat-raised-button matTooltip ="Price" [(ngModel)]="productObj.price" class="form-control">
+                    </div>
+                </div> 
+                <div class="row">
+                    <div class="col-6">
+                        <label for="">Category</label> 
+                        <select mat-raised-button matTooltip ="Category" [(ngModel)]="productObj.categoryName" class="form-select">
+                            @for( data of categoryList ; track data)
+                            {
+                             <option *ngFor="let category of categoryList" [value]="category.categoryName"> 
+                                
+                                 {{data.categoryName}}
+                             </option> 
+                            }
+                            
+                        </select> 
+                    </div>
+                    <div class="col-6">
+                        <label for="">Delivery Time Span</label>
+                        <input type="text" mat-raised-button matTooltip ="Delivery Time Span" [(ngModel)]="productObj.deliveryTimeSpan" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <label for="">Image Url</label>
+                        <input type="text" mat-raised-button matTooltip ="Image URL" [(ngModel)]="productObj.imageUrl" class="form-control">
+                    </div> 
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <label for="">Product Description</label>
+                        <textarea rows="4" mat-raised-button matTooltip ="Product Description" class="form-control" [(ngModel)]="productObj.description"  ></textarea>
+                    </div> 
+                </div>
+                <div class="row pt-2">
+                    <div class="col-6 text-center">
+                       <button class="btn btn-success" mat-raised-button matTooltip ="Reset">Reset</button>
+                    </div>
+                    <div class="col-6 text-center">
+                        <!-- <button class="btn btn-success" mat-raised-button matTooltip ="Create Product" *ngIf="productObj.productId == 0" (click)="onSave()">Create Product</button>
+                        <button class="btn btn-primary" mat-raised-button matTooltip ="Update Product" *ngIf="productObj.productId !==0" (click)="onUpdate()">Update Product</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
